@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class="text-center mt-5 mb-5 text-primary">Welcome to the Car Sparkle profile page</h1>
+<div class="text-center">
+  <div class="d-flex justify-content-center align-items-center gap-2">
+    <a href="{% url 'edit_profile' %}">
+      <button class="btn btn-outline-primary ">Edit Profiles</button>
+    </a>
+   
+  </div>
+  <h2 class="text-center mt-5 mb-5 text-white btn btn-success">Order history </h2>
+  <div>
+    <table class="table table-hover p-3 mb-5 mr-5">
+      <thead>
+        <tr>
+          <th scope="col">Sl.no</th>
+          <th scope="col">Customer Name</th>
+          <th scope="col">User email</th>
+          <th scope="col">Car Name</th>
+          <th scope="col">Car id</th>
+          <th scope="col">Car price</th>
+          <th scope="col">total price</th>
+          <th scope="col">Order Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <th scope="row">{{ forloop.counter }}</th>
+          <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+          <td>{{order.user.email}}</td>
+          <td>{{order.car_model.car_name}}</td>
+          <td>{{order.car_model.id}}</td>
+          <td>{{order.car_model.price}}</td>
+          <td>{{order.total_price}}</td>
+          <td>{{ order.created_on}}</td>
+  
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

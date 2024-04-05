@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Order History</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Car Name</th>
+                <th>Price</th>
+                <th>Date Ordered</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.car_model.car_name }}</td>
+                <td>{{ order.car_model.price }}</td>
+                <td>{{ order.created_on }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No orders found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

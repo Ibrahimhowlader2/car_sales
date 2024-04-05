@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="row container-fluid mt-5 mb-5">
+    <div class="col-6 p-5">
+        <h1>BEAT THE BITE OF WINTER <br> WITH NEW IDEAS</h1>
+        <h4>Find the GM Vehicle <br> that's right for you</h4>
+        <button type="button" class="btn btn-outline-primary mt-1 shadow-lg p-3 mb-5 bg-body-primary rounded">Let's
+            Gooo....</button>
+    </div>
+    <div class="col-6">
+        <img src="{% static 'images/car.jpg' %}" class="w-100 h-75" alt="">
+    </div>
+</section>
+
+<!-- brand category section -->
+<section class=" row container-fluid">
+    <div class="text-center mt-5 mb-5 gap-5 col-12">
+        <h1 class="text-center text-primary mb-3 mt-3">Our Brand Categories</h1>
+        {% for single in category %}
+        <a href="{% url 'category_wise_post' single.slug %}">
+            <button type="button" class="btn btn-outline-danger">
+                {{single}}
+            </button>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="col-12 mb-5">
+        <h1 class="mb-4"> Total data : {{ data | length}}</h1>
+        <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
+            {% for item in data %}
+        <div class="card" style="width: 18rem;">
+            <img src="{{item.file.url}}" class="card-img-top img-fluid" style="width: 285px; height: 280px;" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Car title: {{item.car_name}}</h5>
+                <p class="card-text"><b>Car description:</b> {{item.description | truncatewords:10}}</p>
+                <h3>Price: {{item.price}}$</h3>
+                <h4>Brand name: {{item.brand.Brand_Name}}</h4>
+                <a href="{% url 'car_details' item.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
